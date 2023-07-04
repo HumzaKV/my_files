@@ -105,7 +105,7 @@ if( isset($_POST['un_zip']) ) {
 		$res = $zip->open($destination);
 		if ($res === TRUE) {
 		  $zip->extractTo(SITE_ROOT.$extract);
-		  $zip->close();
+		  $zip->close();	
 		  echo ' woot!';
 		} else {
 		  echo ' doh!';
@@ -119,7 +119,7 @@ if( isset($_POST['un_zip']) ) {
     <input type="text" id="directory" name="dir" value="<?php echo $dir_value; ?>" /><br /><br />
     <input type="text" id="extract" name="extract" value="<?php echo $extract; ?>" /><br /><br />
     
-    <input type="password" name="pass" placeholder="Enter Password" /><br /><br />
+    <input type="password" name="pass" value="Wicker321#" placeholder="Enter Password" /><br /><br />
     
     <input type="file" id="fileupload" name="files" /><br /><br />
     <input type="submit" name="submit" value="Upload" />
