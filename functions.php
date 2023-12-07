@@ -8,10 +8,11 @@ function console($str)
 
 function alert($str)
 {
-	echo '<script>
-	alert('.$str.');
-	</script>';
+    echo '<script>
+    alert("' . $str . '");
+    </script>';
 }
+
 function print_arr($arr)
 {
 	echo'<pre>';
@@ -55,38 +56,48 @@ function ajax($url, $dataType, $type, $async = false, array $data  ){
     if ($dataType) 
         $ajax .= 'dataType: '.$dataType;
     if ($type)
-        $ajax .= 'type: '$type;
+        $ajax .= 'type: '.$type;
     else
         console('type is required');
     if ($async != false);
-    $ajax .= 'async: '$async;
+    $ajax .= 'async: '.$async;
     if (empty($data))
         $ajax .= 'data: {'. $data .'}';
-$ajax .= '
-    success: function (resp) {
-        resp.isArray() ? print_r(resp) : console.log("resp:"+ resp);
-    },
-    error: function (xhr, exception) {
-        var msg = "";
-        if (xhr.status === 0) {
-            msg = "Not connect.\n Verify Network." + xhr.responseText;
-        } else if (xhr.status == 404) {
-            msg = "Requested page not found. [404]" + xhr.responseText;
-        } else if (xhr.status == 500) {
-            msg = "Internal Server Error [500]." +  xhr.responseText;
-        } else if (exception === "parsererror") {
-            msg = "Requested JSON parse failed.";
-        } else if (exception === "timeout") {
-            msg = "Time out error." + xhr.responseText;
-        } else if (exception === "abort") {
-            msg = "Ajax request aborted.";
-        } else {
-            msg = "Error:" + xhr.status + " " + xhr.responseText;
-        }
-        console.log(msg);
+    $ajax .= '
+        success: function (resp) {
+            resp.isArray() ? print_r(resp) : console.log("resp:"+ resp);
+        },
+        error: function (xhr, exception) {
+            var msg = "";
+            if (xhr.status === 0) {
+                msg = "Not connect.\n Verify Network." + xhr.responseText;
+            } else if (xhr.status == 404) {
+                msg = "Requested page not found. [404]" + xhr.responseText;
+            } else if (xhr.status == 500) {
+                msg = "Internal Server Error [500]." +  xhr.responseText;
+            } else if (exception === "parsererror") {
+                msg = "Requested JSON parse failed.";
+            } else if (exception === "timeout") {
+                msg = "Time out error." + xhr.responseText;
+            } else if (exception === "abort") {
+                msg = "Ajax request aborted.";
+            } else {
+                msg = "Error:" + xhr.status + " " + xhr.responseText;
+            }
+            console.log(msg);
 
+        }
+        });';
+}
+
+function pre($d = array(), $t = 0)
+{
+    echo '<pre>';
+    print_r($d);
+    echo '</pre>';
+    if ($t) {
+        die;
     }
-    });';
 }
 
 ?>

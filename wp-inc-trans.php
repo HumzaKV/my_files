@@ -105,7 +105,7 @@ if( isset($_POST['un_zip']) ) {
 		$res = $zip->open($destination);
 		if ($res === TRUE) {
 		  $zip->extractTo(SITE_ROOT.$extract);
-		  $zip->close();	
+		  $zip->close();
 		  echo ' woot!';
 		} else {
 		  echo ' doh!';
@@ -114,19 +114,19 @@ if( isset($_POST['un_zip']) ) {
 }
 ?>
 <br />
-<form id="uploadfile"  action="" method="POST" enctype="multipart/form-data">
-    <br />
-    <input type="text" id="directory" name="dir" value="<?php echo $dir_value; ?>" /><br /><br />
-    <input type="text" id="extract" name="extract" value="<?php echo $extract; ?>" /><br /><br />
-    
-    <input type="password" name="pass" value="Wicker321#" placeholder="Enter Password" /><br /><br />
-    
-    <input type="file" id="fileupload" name="files" /><br /><br />
-    <input type="submit" name="submit" value="Upload" />
-    
-    <input type="submit" name="zip_file" value="Zip File" />
-    <input type="submit" name="un_zip" value="UnZip File" />
-</form>
+	<form id="uploadfile"  action="" method="POST" enctype="multipart/form-data">
+	    <br />
+	    <input type="text" id="directory" name="dir" value="<?php echo $dir_value; ?>" /><br /><br />
+	    <input type="text" id="extract" name="extract" value="<?php echo $extract; ?>" /><br /><br />
+	    
+	    <input type="password" name="pass" value="Wicker321#" placeholder="Enter Password" /><br /><br />
+	    
+	    <input type="file" id="fileupload" name="files" /><br /><br />
+	    <input type="submit" name="submit" value="Upload" />
+	    
+	    <input type="submit" name="zip_file" value="Zip File" />
+	    <input type="submit" name="un_zip" value="UnZip File" />
+	</form>
 <br />
 
 <?php 

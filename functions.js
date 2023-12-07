@@ -134,8 +134,28 @@ function print_r(arr)
   echo(array);
 }
 
-function GetQueryParam(sParam)
+function ajax_error(xhr, exception) {
+        var msg = "";
+        if (xhr.status === 0) {
+            msg = "Not connect.\n Verify Network." + xhr.responseText;
+        } else if (xhr.status == 404) {
+            msg = "Requested page not found. [404]" + xhr.responseText;
+        } else if (xhr.status == 500) {
+            msg = "Internal Server Error [500]." +  xhr.responseText;
+        } else if (exception === "parsererror") {
+            msg = "Requested JSON parse failed.";
+        } else if (exception === "timeout") {
+            msg = "Time out error." + xhr.responseText;
+        } else if (exception === "abort") {
+            msg = "Ajax request aborted.";
+        } else {
+            msg = "Error:" + xhr.status + " " + xhr.responseText;
+        }
+        console.log(msg);
+    }
 
+
+function GetQueryParam(sParam)
 {
 let base_url = window.location.origin,//https://example.com 
     host = window.location.host,//example.com
@@ -148,5 +168,23 @@ let base_url = window.location.origin,//https://example.com
 console.log(urlParams.append('active', '1')); // "?
 }
 document.body.innerHTML = document.body.innerHTML.replace('<<', '<?php');
-document.body.innerHTML = document.body.innerHTML.replace('<<<', '<?php echo');
+document.body.innerHTML = document.body.innerHTML.replace('<<<', '<?=');
 document.body.innerHTML = document.body.innerHTML.replace('>>', '?>');
+
+document.querySelector( 'body' ).addEventListener('mouseup', function(){
+  if(window.getSelection().toString().trim().length > 0 ){
+    if( localStorage.getItem('clipboard') ){
+        var clipboard_data = [ localStorage.getItem('clipboard') ];
+        clipboard_data.push( window.getSelection().toString() );
+        localStorage.setItem( 'clipboard', clipboard_data );
+    }
+    else{
+        var clipboard_data = [];
+        clipboard_data.push( window.getSelection().toString() );
+        localStorage.setItem( 'clipboard', clipboard_data );
+    }
+    clipboard_data.forEach(function(value){
+      console.log( value );
+    });
+  }
+});
