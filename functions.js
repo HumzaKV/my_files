@@ -4,8 +4,7 @@ function echo(str)
 }
 
 // start of result function
-function result(tag,str)
-{
+function result(tag,str){
 
   if (!str) 
   {
@@ -125,9 +124,9 @@ function result(tag,str)
 
 
   } //end of else 1
-
 }
 //end of result function
+
 function print_r(arr)
 {
   let array = JSON.parse(arr);
@@ -135,37 +134,37 @@ function print_r(arr)
 }
 
 function ajax_error(xhr, exception) {
-        var msg = "";
-        if (xhr.status === 0) {
-            msg = "Not connect.\n Verify Network." + xhr.responseText;
-        } else if (xhr.status == 404) {
-            msg = "Requested page not found. [404]" + xhr.responseText;
-        } else if (xhr.status == 500) {
-            msg = "Internal Server Error [500]." +  xhr.responseText;
-        } else if (exception === "parsererror") {
-            msg = "Requested JSON parse failed.";
-        } else if (exception === "timeout") {
-            msg = "Time out error." + xhr.responseText;
-        } else if (exception === "abort") {
-            msg = "Ajax request aborted.";
-        } else {
-            msg = "Error:" + xhr.status + " " + xhr.responseText;
-        }
-        console.log(msg);
-    }
+  var msg = "";
+  if (xhr.status === 0) {
+      msg = "Not connect.\n Verify Network." + xhr.responseText;
+  } else if (xhr.status == 404) {
+      msg = "Requested page not found. [404]" + xhr.responseText;
+  } else if (xhr.status == 500) {
+      msg = "Internal Server Error [500]." +  xhr.responseText;
+  } else if (exception === "parsererror") {
+      msg = "Requested JSON parse failed.";
+  } else if (exception === "timeout") {
+      msg = "Time out error." + xhr.responseText;
+  } else if (exception === "abort") {
+      msg = "Ajax request aborted.";
+  } else {
+      msg = "Error:" + xhr.status + " " + xhr.responseText;
+  }
+  console.log(msg);
+}
 
 
 function GetQueryParam(sParam)
 {
-let base_url = window.location.origin,//https://example.com 
-    host = window.location.host,//example.com
-    pathArray = window.location.pathname.split( '/' ),//returns object ['', 'test', ''] 
-    urlParams = new URLSearchParams(window.location.search),
-    hasParam = urlParams.has('post'), // true
-    getValue = urlParams.get('action'), // "edit"
-    getAll = urlParams.getAll('action'), // ["edit"]
-    getParamString = urlParams.toString(), // "?post=1234&action=edit"
-console.log(urlParams.append('active', '1')); // "?
+  let base_url = window.location.origin,//https://example.com 
+      host = window.location.host,//example.com
+      pathArray = window.location.pathname.split( '/' ),//returns object ['', 'test', ''] 
+      urlParams = new URLSearchParams(window.location.search),
+      hasParam = urlParams.has('post'), // true
+      getValue = urlParams.get('action'), // "edit"
+      getAll = urlParams.getAll('action'), // ["edit"]
+      getParamString = urlParams.toString(), // "?post=1234&action=edit"
+  console.log(urlParams.append('active', '1')); // "?
 }
 document.body.innerHTML = document.body.innerHTML.replace('<<', '<?php');
 document.body.innerHTML = document.body.innerHTML.replace('<<<', '<?=');
@@ -188,3 +187,59 @@ document.querySelector( 'body' ).addEventListener('mouseup', function(){
     });
   }
 });
+
+function _GET( get, param, args ){
+
+    //Assuming URL is https://welflorida.org/account/?action=subscriptions
+    switch ( get ) {
+      case 'base_url':
+        return window.location.origin;
+        //https://welflorida.org 
+        break;
+
+      case 'host':
+        return window.location.host;
+        //welflorida.org
+        break;
+
+      case 'pathArray':
+        return window.location.host;
+        //returns object ['', 'account', '']
+        break;
+
+      case 'urlParams':
+        var urlParams = new URLSearchParams(window.location.search);
+        // check if a param exists ( bool )
+        if( args == 'check' && param != '' )
+            return urlParams.has(param);
+
+        else if(param == '')
+            console.error('params cannot be empty');
+
+        // get the param value ( string )
+        if( args == 'get' && param != '' )
+            return urlParams.get(param);
+        
+        else if(param == '')
+            console.error('params cannot be empty');
+
+        // get all params of the query string (string )
+        if( args == 'getAll' && param != '' )
+            return urlParams.getAll(param);
+
+        else if(param == '')
+            console.error('params cannot be empty');
+
+        // append a key value pair in query]
+        if( args == 'append' && param != '' )
+            return urlParams.append(param);
+        
+        else if(param == '')
+            console.error('params cannot be empty');
+
+        // returmn entire param string 
+        return urlParams.toString();
+
+        break;
+    }
+}
